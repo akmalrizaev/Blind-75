@@ -51,6 +51,26 @@ def is_anagram(s, t):
         count_t[char] = count_t.get(char, 0) + 1
     return count_s == count_t
 
+# ---------------------------------------------------------------------
+# Solution 3
+# ---------------------------------------------------------------------
+# Efficient Solution
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+
+
+def isAnagram(self, s: str, t: str) -> bool:
+    if len(s) != len(t):
+        return False
+
+    count = [0] * 26  # For lowercase English letters
+    for char in s:
+        count[ord(char) - ord('a')] += 1
+    for char in t:
+        count[ord(char) - ord('a')] -= 1
+
+    return all(x == 0 for x in count)
+
 
 # Example usage
 solution = Solution()
