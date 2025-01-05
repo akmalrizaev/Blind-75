@@ -1,6 +1,7 @@
 # Efficient Solution
 # Time Complexity: O(n * k log k)
 # Space Complexity: O(n * k)
+from collections import defaultdict
 from typing import List
 
 
@@ -52,3 +53,22 @@ class Solution:
             hashmap[frequency_string].append(element)
 
         return list(hashmap.values())
+
+
+# ----------------------------------------------------------------------------
+
+
+def groupAnagrams(strs):
+    anagram_map = defaultdict(list)
+
+    for word in strs:
+        # Create a count of 26 zeros for each letter in the alphabet
+        count = [0] * 26
+
+        for char in word:
+            count[ord(char) - ord('a')] += 1
+
+        # Use the tuple of counts as the key
+        anagram_map[tuple(count)].append(word)
+
+    return list(anagram_map.values())
