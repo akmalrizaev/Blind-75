@@ -70,5 +70,34 @@ def top_k_frequent(nums, k):
 
 ---
 
+### Alternative Approach: Bucket Sort
+
+### Python Code:
+```python
+# Efficient Solution
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        # Step 1: Count frequencies
+        freq_map = Counter(nums)
+        
+        # Step 2: Bucket sort by frequency
+        bucket = [[] for _ in range(len(nums) + 1)]
+        for num, freq in freq_map.items():
+            bucket[freq].append(num)
+        
+        # Step 3: Collect top k frequent elements
+        result = []
+        for i in range(len(bucket) - 1, 0, -1):
+            result.extend(bucket[i])
+            if len(result) >= k:
+                break
+        
+        return result[:k]
+
+
+```
+
 ## Conclusion
 The brute force approach sorts the elements by frequency, which is less efficient for large inputs. The efficient solution uses a heap to maintain the top `k` elements, achieving better performance for large datasets. This problem showcases the importance of using appropriate data structures like heaps for optimal performance in selection problems.
